@@ -1,7 +1,36 @@
 from django.db import models
 
-from django.db import models
+class Agendamento(models.Model):
+  id_agendamento = models.AutoField(primary_key=True)
+  
+  cliente = models.ForeignKey(
+    'clientes',
+    on_delete=models.CASCADE,
+    db_column='cliente_id'
+  )
+  pet = models.ForeignKey(
+    'pets',
+    on_delete=models.CASCADE,
+    db_column='pet_id'
+  )
+  servico = models.ForeignKey(
+    'servicos',
+    on_delete=models.CASCADE,
+    db_column='servico_id'
+  )
+  produto = models.ForeignKey(
+    'produtos',
+    on_delete=models.CASCADE,
+    db_column='produto_id'
+  )
+  data_hora_agendamento = models.DateTimeField()
 
+  class Meta:
+    db_table = "agendamentos"
+    
+  def __str__(self):
+    return f"Agendamento {self.id_agendamento} - Cliente: {self.cliente.nome_cliente}, Pet: {self.pet.nome_pet}, Serviço: {self.servico.tipo_servico}, Produto: {self.produto.nome_produto}"
+    
 class clientes(models.Model):
   id_cliente = models.AutoField(primary_key=True)
   
@@ -41,7 +70,7 @@ class pets(models.Model):
     db_column='dono_id'
  )
   class Meta:
-    db_table = "pets"
+    db_table = "agendamento_pets"
 
 class servicos(models.Model): 
   id_servico = models.AutoField(primary_key=True)
@@ -58,7 +87,7 @@ class servicos(models.Model):
   data_hora_agenda = models.DateTimeField()
 
   class Meta:
-    db_table = "servicos"
+    db_table = "agendamento_servicos"
 
 class produtos(models.Model):
   id_produto = models.AutoField(primary_key=True)
