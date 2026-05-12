@@ -31,6 +31,5 @@ CREATE TABLE IF NOT EXISTS servicos (
 CREATE TABLE IF NOT EXISTS produtos (
     id_produto SERIAL PRIMARY KEY,
     nome_produto VARCHAR(100) NOT NULL,
-    categoria_produto VARCHAR(50),           -- Campo exigido no PDF
-    valor_produto DECIMAL(10, 2) NOT NULL    -- Nome exato do PDF
-);
+    categoria_produto VARCHAR(50),           
+    valor_produto DECIMAL(10, 2) NOT NULL    
